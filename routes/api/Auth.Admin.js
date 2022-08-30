@@ -6,6 +6,23 @@ const jwtsecret = "steamtroopsindia";
 const bcrypt = require("bcryptjs");
 const { validationResult, check } = require("express-validator");
 const Admin = require("../../models/Admin");
+const getAuth = require('../../middleware/authentication')
+
+/*
+@Description: API for login with predefined credentials for admin
+@route:/api/auth
+@Public
+@Method: GET
+*/
+router.get("/", getAuth, async (req, res) => {
+  //Once authorized we want to send back the user data;
+  try {
+    const user = await Admin.findById(req.user.id).select("-password"); //we want user data but we dont want to send the password
+    res.json(user);
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 /*
 @Description: API for login with predefined credentials for admin

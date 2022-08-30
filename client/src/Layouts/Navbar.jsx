@@ -1,26 +1,28 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
+import {
+  Button,
+  IconButton,
+  AppBar,
+  Box,
+  List,
+  ListItem,
+  ListItemText,
+  Typography,
+  Toolbar,
+  Divider,
+  Drawer,
+  ListItemButton,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 const drawerWidth = 240;
 const navItems = ["Home", "About"];
 
-function DrawerAppBar(props) {
+const DrawerAppBar = (props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -45,7 +47,7 @@ function DrawerAppBar(props) {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
-
+  
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar component="nav" style={{ backgroundColor: "#0018a8" }}>
@@ -91,7 +93,7 @@ function DrawerAppBar(props) {
               width: drawerWidth,
             },
           }}
-          style={{backgroundColor:'black'}}
+          style={{ backgroundColor: "black" }}
         >
           {drawer}
         </Drawer>
@@ -118,7 +120,12 @@ function DrawerAppBar(props) {
               Science Technology Engineering Arts And Mathematics
             </h4>
             <div style={{ display: "flex", paddingTop: 30 }}>
-              <Button className="login-admin-button" onClick={()=>navigate('/login-admin')}>Login As Admin</Button>
+              <Button
+                className="login-admin-button"
+                onClick={() => navigate("/login-admin")}
+              >
+                Login As Admin
+              </Button>
               <Button className="login-as-student">
                 Register/Login As Student
               </Button>
@@ -138,13 +145,9 @@ function DrawerAppBar(props) {
       </Box>
     </Box>
   );
-}
+};
 
 DrawerAppBar.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window: PropTypes.func,
 };
 
