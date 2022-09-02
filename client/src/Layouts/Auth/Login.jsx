@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { Button } from "@mui/material";
 import { login } from "../../actions/auth";
 import { connect } from "react-redux";
 import propTypes from "prop-types";
-import { Navigate } from "react-router-dom";
+import { useNavigate,Navigate } from "react-router-dom";
 const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     adminEmail: "",
     password: "",
   });
+  const navigate = useNavigate()
   const { adminEmail, password } = formData;
   const onHandleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -71,7 +71,8 @@ const Login = ({ login, isAuthenticated }) => {
             borderRight: "none",
           }}
         />
-        <input type="submit"/>
+        <input type="submit" style={{marginTop:20,width:100,color:'blue',backgroundColor:'black',fontFamily:'sans-serif'}}/>
+        <p style={{color:"white"}} onClick={()=>navigate('/')}>Login/Register As Student?</p>
       </div>
     </form>
   );
