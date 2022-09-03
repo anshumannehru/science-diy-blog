@@ -10,7 +10,7 @@ import {
   USER_LOADED,
   AUTH_ERROR,
 } from "./types";
-
+import { Navigate } from "react-router-dom";
 /*loading user on first load*/
 
 export const loadUser = () => async dispatch => {
@@ -50,6 +50,7 @@ export const login = (adminEmail, password) => async (dispatch) => {
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
+    <Navigate to='/dashboard'/>
   } catch (error) {
     console.log(error);
   }

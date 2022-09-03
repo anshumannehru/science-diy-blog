@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { login } from "../../actions/auth";
 import { connect } from "react-redux";
 import propTypes from "prop-types";
-import { useNavigate,Navigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     adminEmail: "",
     password: "",
   });
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { adminEmail, password } = formData;
   const onHandleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,11 +17,11 @@ const Login = ({ login, isAuthenticated }) => {
     e.preventDefault();
     login(adminEmail, password);
   };
-  if (isAuthenticated){
-    return <Navigate replace to={'/dashboard'}/>
+  if (isAuthenticated) {
+    return <Navigate to={"/dashboard"} />;
   }
   return (
-    <form onSubmit={(e)=>onSubmit(e)}>
+    <form onSubmit={(e) => onSubmit(e)}>
       <div
         style={{
           display: "flex",
@@ -71,8 +71,22 @@ const Login = ({ login, isAuthenticated }) => {
             borderRight: "none",
           }}
         />
-        <input type="submit" style={{marginTop:20,width:100,color:'blue',backgroundColor:'black',fontFamily:'sans-serif'}}/>
-        <p style={{color:"white"}} onClick={()=>navigate('/')}>Login/Register As Student?</p>
+        <input
+          type="submit"
+          style={{
+            marginTop: 10,
+            width: 200,
+            color: "blue",
+            backgroundColor: "black",
+            fontFamily: "sans-serif",
+          }}
+        />
+        <p
+          style={{ color: "white", cursor: "pointer" }}
+          onClick={() => navigate("/")}
+        >
+          login/register as a student?
+        </p>
       </div>
     </form>
   );

@@ -8,7 +8,7 @@ module.exports = function (req, res, next) {
   try {
     const decoded = jwt.verify(token, jwtsecret);
     req.user = decoded.user;
-    next()
+    next();
   } catch (error) {
     res.status(401).json({ msg: "Token is not valid" });
   }

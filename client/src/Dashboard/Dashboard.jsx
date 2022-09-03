@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Button, Avatar } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 import LabelImportantIcon from "@mui/icons-material/LabelImportant";
@@ -6,10 +6,16 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import propTypes from "prop-types";
 import { connect } from "react-redux";
-import { logout } from "../actions/auth";
+import { logout,login,loadUser } from "../actions/auth";
 import CountUp from "react-countup";
-const Dashboard = ({ auth: { admin, loading }, logout }) => {
+import { useNavigate } from "react-router-dom";
+import store from "../store";
+const Dashboard = ({ auth: { admin,loading }, logout }) => {
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
   const currentTime = new Date();
+  const navigate = useNavigate();
   return (
     <div style={{ padding: 20, marginTop: 50 }}>
       <div
@@ -48,7 +54,7 @@ const Dashboard = ({ auth: { admin, loading }, logout }) => {
       >
         <div>
           <PostAddIcon style={{ color: "white" }} />
-          <Button>Post Activity Content</Button>
+          <Button onClick={()=>navigate('/activity-page')}>Post Activity Content</Button>
         </div>
         <div>
           <LabelImportantIcon style={{ color: "white" }} />
@@ -99,7 +105,7 @@ const Dashboard = ({ auth: { admin, loading }, logout }) => {
             }}
           >
             <h5 style={{ color: "white" }}>
-              No Of Activity Page Published {loading}
+              No Of Activity Page Published
             </h5>
             <CountUp
               end={100}

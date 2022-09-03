@@ -1,37 +1,64 @@
 import "./App.css";
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import DrawerAppBar from "./Layouts/Navbar";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Router } from "react-router-dom";
 import Login from "./Layouts/Auth/Login";
 import store from "./store";
 import { Provider } from "react-redux";
 import { loadUser } from "./actions/auth";
 import setAuthToken from "./util/setAuthToken";
-import  Dashboard  from "./Dasboard/Dashboard";
+import Dashboard from "./Dashboard/Dashboard";
 import PrivateRoute from "./routing/PrivateRoute";
+import ActivityPage from "./ActivityPage/ActivityPage";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-function App() {
+const App = () => {
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
-
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <Fragment>
+        {/* <Routes>
+          <Route path="/" element={<DrawerAppBar />} />
+        </Routes>
+        <Routes>
+          <Route path="/login-admin" element={<Login />} />
+          <Routes
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+        </Routes> */}
         <Routes>
           <Route path="/" element={<DrawerAppBar />} />
           <Route path="/login-admin" element={<Login />} />
-          <Route element={<PrivateRoute />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Route>
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/activity-page"
+            element={
+              <PrivateRoute>
+                <ActivityPage />
+              </PrivateRoute>
+            }
+          />
         </Routes>
-      </BrowserRouter>
+      </Fragment>
     </Provider>
   );
-}
+};
 
 export default App;
