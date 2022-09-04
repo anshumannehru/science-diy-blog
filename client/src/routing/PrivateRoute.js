@@ -2,9 +2,9 @@ import React from "react";
 import { Route, Navigate, Routes, Outlet, useLocation } from "react-router-dom";
 import propTypes, { element } from "prop-types";
 import { connect } from "react-redux";
-const PrivateRoute = ({ auth: { isAuthenticated },children }) => {
-    const token = localStorage.getItem('token')
-    return  token ? children : <Navigate to="/login-admin" />;
+const PrivateRoute = ({ children }) => {
+  const token = localStorage.getItem("token");
+  return token ? children : <Navigate to="/login-admin" />;
 };
 
 PrivateRoute.propTypes = {
