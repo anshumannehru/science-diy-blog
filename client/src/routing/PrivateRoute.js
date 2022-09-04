@@ -3,7 +3,8 @@ import { Route, Navigate, Routes, Outlet, useLocation } from "react-router-dom";
 import propTypes, { element } from "prop-types";
 import { connect } from "react-redux";
 const PrivateRoute = ({ auth: { isAuthenticated },children }) => {
-    return  isAuthenticated ? children : <Navigate to="/login-admin" />;
+    const token = localStorage.getItem('token')
+    return  token ? children : <Navigate to="/login-admin" />;
 };
 
 PrivateRoute.propTypes = {
@@ -15,4 +16,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps)(PrivateRoute); //connect redux with the actions we craeted
+export default connect(mapStateToProps)(PrivateRoute); //connect redux with the actions we created

@@ -10,7 +10,7 @@ const ActivityPage = ({
 }) => {
   useEffect(() => {
     getCurrentActivity();
-  }, [getCurrentActivity]);
+  }, []);
   return (
     <div>
     {loading?<h1>Loading</h1>:<h1>react</h1>}
